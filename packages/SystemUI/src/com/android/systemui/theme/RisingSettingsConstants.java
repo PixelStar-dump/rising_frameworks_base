@@ -26,9 +26,6 @@ public class RisingSettingsConstants {
     public static final String LOCKSCREEN_WIDGETS = "lockscreen_widgets";
     public static final String LOCKSCREEN_WIDGETS_EXTRAS = "lockscreen_widgets_extras";
     public static final String USER_SELECTED_RESOLUTION = "user_selected_resolution";
-    public static final String STATUS_BAR_BATTERY_STYLE = Settings.System.STATUS_BAR_BATTERY_STYLE;
-    public static final String QS_BATTERY_STYLE = Settings.System.QS_BATTERY_STYLE;
-    public static final String QS_SHOW_BATTERY_PERCENT = Settings.System.QS_SHOW_BATTERY_PERCENT;
     public static final String QS_TILE_UI_STYLE = Settings.System.QS_TILE_UI_STYLE;
     public static final String QS_COLORED_ICONS = "qs_colored_icons";
     public static final String CLOCK_STYLE = "clock_style";
@@ -46,9 +43,6 @@ public class RisingSettingsConstants {
         LOCKSCREEN_WIDGETS,
         LOCKSCREEN_WIDGETS_EXTRAS,
         USER_SELECTED_RESOLUTION,
-        STATUS_BAR_BATTERY_STYLE,
-        QS_BATTERY_STYLE,
-        QS_SHOW_BATTERY_PERCENT,
         QS_TILE_UI_STYLE,
         QS_COLORED_ICONS,
         CLOCK_STYLE,

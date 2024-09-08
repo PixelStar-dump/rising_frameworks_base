@@ -30,8 +30,6 @@ import android.graphics.drawable.Drawable
 import android.util.PathParser
 import android.util.TypedValue
 
-import androidx.core.content.ContextCompat
-
 import com.android.settingslib.R
 import com.android.settingslib.Utils
 
@@ -80,11 +78,10 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
     // Colors can be configured based on battery level (see res/values/arrays.xml)
     private var colorLevels: IntArray
 
-    private val textColorPrimary: Int = ContextCompat.getColor(context, R.color.settingslib_text_color_primary)
-    private var fillColor: Int = textColorPrimary
-    private var backgroundColor: Int = textColorPrimary
+    private var fillColor: Int = Color.MAGENTA
+    private var backgroundColor: Int = Color.MAGENTA
     // updated whenever level changes
-    private var levelColor: Int = textColorPrimary
+    private var levelColor: Int = Color.MAGENTA
 
     // Dual tone implies that battery level is a clipped overlay over top of the whole shape
     private var dualTone = false
@@ -243,7 +240,7 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
             fillPaint.color = levelColor
 
             // Show colorError below this level
-            if (batteryLevel <= criticalLevel && !charging) {
+            if (batteryLevel <= Companion.CRITICAL_LEVEL && !charging) {
                 c.save()
                 c.clipPath(scaledFill)
                 c.drawPath(levelPath, fillPaint)
@@ -262,10 +259,8 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
             // If power save is enabled draw the level path with colorError
             c.drawPath(levelPath, errorPaint)
             // And draw the plus sign on top of the fill
-            if (!showPercent) {
-                fillPaint.color = fillColor
-                c.drawPath(scaledPlus, fillPaint)
-            }
+            fillPaint.color = fillColor
+            c.drawPath(scaledPlus, fillPaint)
         }
         c.restore()
 
@@ -361,8 +356,8 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
         return batteryLevel
     }
 
-    override fun setBounds(left: Int, top: Int, right: Int, bottom: Int) {
-        super.setBounds(left, top, right, bottom)
+    override fun onBoundsChange(bounds: Rect) {
+        super.onBoundsChange(bounds)
         updateSize()
     }
 
@@ -451,6 +446,7 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
     companion object {
         const val WIDTH = 12f
         const val HEIGHT = 20f
+        private const val CRITICAL_LEVEL = 20
         // On a 12x20 grid, how wide to make the fill protection stroke.
         // Scales when our size changes
         private const val PROTECTION_STROKE_WIDTH = 3f
